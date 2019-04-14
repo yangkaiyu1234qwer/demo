@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd">
+        
+	 <bean id="demoService" class="com.hunktimes.springaop_demo.service.DemoServiceImpl" />
+	 
+	 <!-- aop 配置start -->
+	 <bean id="demoAspectBean" class="com.hunktimes.springaop_demo.aspect.DemoAspect" />
+	  
+     <aop:config expose-proxy="true" proxy-target-class="true">												 
+     	<aop:pointcut id="demo-pointcut" expression="execution(* com.hunktimes.springaop_demo.service.*.*(..))"/>
+     	<aop:aspect id="demoAspect" ref="demoAspectBean" order="1">
+     		<aop:after method="afterAdvice" pointcut-ref="demo-pointcut"/>
+     	</aop:aspect>
+     </aop:config>
+	 <!-- aop 配置end -->
+
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd"
+        default-autowire="byName">
+    
+    <!-- advisor -->
+    <bean id="beatAdvisor0" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+	    <!-- advice -->
+    	<property name="advice">
+    		 <bean class="com.hunktimes.springaop_proxy_demo.advice.BeatAdvice0" />
+    	</property>
+    	<!-- pointcut -->
+    	<property name="pattern" value="com.hunktimes.springaop_proxy_demo.service.DemoService0.sing" />
+    </bean>   
+    
+    <!-- 手动为指定的bean创建代理 -->
+    <bean class="org.springframework.aop.framework.ProxyFactoryBean"> 
+    	<property name="target">
+    		 <bean id="demoService0" class="com.hunktimes.springaop_proxy_demo.service.DemoServiceImpl0" />
+    	</property>
+    	<property name="interceptorNames">
+    		<list>
+    			<value>beatAdvisor0</value>
+    		</list>
+    	</property>
+    </bean>
+</beans>

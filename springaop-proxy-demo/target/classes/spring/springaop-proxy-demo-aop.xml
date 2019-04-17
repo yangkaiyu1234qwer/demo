@@ -24,12 +24,14 @@
     		 <bean class="com.hunktimes.springaop_proxy_demo.advice.BeatAdvice0" />
     	</property>
     	<property name="pattern" value="com.hunktimes.springaop_proxy_demo.service.DemoService0.sing" />
+    	<property name="order" value="100"></property>
     </bean>   
     
     <bean id="beatAdvisor1" class="com.hunktimes.springaop_proxy_demo.pointcutadvisor.BeatAdvisor1">
     	<property name="advice">
     		<bean class="com.hunktimes.springaop_proxy_demo.advice.BeatAdvice1" />
     	</property>
+    	<property name="order" value="101"></property>
     </bean>
     
     <!-- 静态正则表达式方法名匹配advisor -->
@@ -42,6 +44,7 @@
     			<value>.*Service2.sing.*</value>
     		</list>
     	</property>
+    	<property name="order" value="102"></property>
     </bean>
     
     <!-- 默认的动态方法名匹配advisor -->
@@ -52,6 +55,7 @@
     	<property name="pointcut">
     		<bean class="com.hunktimes.springaop_proxy_demo.pointcutadvisor.pointcut.BeatPointcut3"></bean>
     	</property>
+    	<property name="order" value="103"></property>
     </bean>
     
     <bean id="demoService0"  class="com.hunktimes.springaop_proxy_demo.service.DemoServiceImpl0" />
